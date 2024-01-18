@@ -1,0 +1,88 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>   
+    <title>User Details</title>
+</head>
+{% block content %}
+
+<body style="background: url('../static/images/restaurant2.jpg');">
+      <div class="container-fluid mt-5" >
+        <div class="row">
+          <div class="col">
+            <br>
+            <br>
+            <div class="container">
+              <div class="row">
+                
+                <div class="col-sm-12">
+                  <h3 class="texl-left text-light">Order Details</h3>
+                  {% if order %}
+                  <table class="table table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Pincode</th>
+                        <th scope="col">Order Details</th>
+                        <th scope="col">Payment Mode</th>
+                        <th scope="col">Action</th>
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for i in order %}
+                      <tr>
+                        <th scope="row">{{i.id}}</th>
+                        <td>{{i.customer_name}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.address}}</td>
+                        <td>{{i.pincode}}</td>
+                        <td>{{i.order_detail}}</td>
+                        <td>{{i.payment_mode}}</td>
+
+                        <td>
+
+                          <form action="{% url 'delete_order' i.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Delete" />
+
+                          </form>
+                        </td>
+                      </tr>    
+                      {% endfor %}
+                    </tbody>
+                  </table>
+
+                  {% else %}
+                  <h5>No data found</h5>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   
+</body>
+{% endblock content %}
+
+</html>

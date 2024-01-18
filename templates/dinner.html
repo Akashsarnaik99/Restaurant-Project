@@ -1,0 +1,50 @@
+{% extends 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+    <link rel="stylesheet" href="../static/css">
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>  
+    <title>Tomato</title>
+</head>
+<body>
+  {% block content %}
+      <div class="main-content mt-5">
+        <h1>Dinner</h1>
+        <form method="post" action="{% url 'dinner' %}">
+          {% csrf_token %}
+        {% for item in items %}
+        <div class="card mt-5" style="width:300px">
+          <img class="card-img-top" src="{{item.image.url}}" alt="Card image"  >
+          <div class="card-body">
+            <h4 style="text-align: center; color:white">{{item.title}}</h4>
+              <p style="color:white">{{item.rating}}<span class="fa fa-star checked"></span></p>
+              <p style="color:white">Price 
+                <i class="fa fa-rupee"></i>
+                 {{item.price}} </p>
+                 <input type="checkbox" name="selected_items" value="{{ item.id }}" /><p>Add to cart</p>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="row mt-5">
+          <div class="col-md-4" style="margin-left:35%">  
+            <input type="submit" value="Proceed to Checkout" class=" btn btn-primary">
+    
+          </div>
+        <div>
+ 
+        {% endblock content %}
+
+</body>
+</html>
