@@ -4,5 +4,5 @@ Technologies Used:
   2)Backend: Python 3.11.5
 
 
- Aim of project of build a restaurant application where customer can place his order as well as his infomation 
- is saved in database with all information like item details, payment mode and such similar information.
+ Aim of project of build a restaurant application where customer can place his order as well as as order is
+ placed, the infomation is saved in database such as item details, payment mode,custome details.
